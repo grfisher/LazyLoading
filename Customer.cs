@@ -14,6 +14,8 @@ namespace LazyLoading
         public Customer()
         {
             _CustomerName = "Shiv";
+            _Orders = new Lazy<List<Order>>(() => LoadOrders()); // It will wait until asked for orders before actually loading
+            
             //_Orders = LoadOrders(); // Loads the order object even though not needed
         }
 
@@ -41,8 +43,6 @@ namespace LazyLoading
         {
             get
             {
-                _Orders = new Lazy<List<Order>>(() => LoadOrders());
-
                 return _Orders.Value;
             }
         }
